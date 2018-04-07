@@ -17,6 +17,10 @@
     "loadtest": "./loadtest.sh",
     "test": "node_modules/.bin/mocha ./index.test.js --bail --slow 600"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/portnoy/proxy.git"
+  },
   "author": "Eugene Portnoy",
   "license": "MIT"
 }
