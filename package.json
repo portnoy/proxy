@@ -1,0 +1,28 @@
+{
+  "name": "proxy-3030",
+  "version": "1.0.0",
+  "description": "Image proxy service",
+  "main": "proxy.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "start":"node proxy.js",
+    "test": "cd tests && npm test ; cd -",
+    "loadtest": "cd tests && npm run loadtest 333 ; cd -"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/portnoy/proxy.git"
+  },
+  "keywords": [
+    "proxy",
+    "node.js"
+  ],
+  "author": "Eugene Portnoy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/portnoy/proxy/issues"
+  },
+  "homepage": "https://github.com/portnoy/proxy#readme"
+}
