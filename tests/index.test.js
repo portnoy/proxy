@@ -23,9 +23,11 @@ describe('Connectivity test:', () => {
 const getReq = require('./index').getReq;
 const headReq = require('./index').headReq;
 
-var config = require('./proxy-config.js');
-const port = process.env.PORT || config.port;
-const proxy = 'http://localhost:' + port;
+var config = require('./test-config');
+
+const port = process.env.PORT || config.test.port;
+const proxy = config.test.proto + config.test.host + port;
+console.log('Testing proxy service on', proxy);
 
 describe('Negative tests:', () => {
   let tests = [

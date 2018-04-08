@@ -15,7 +15,7 @@
   },
   "scripts": {
     "loadtest": "./loadtest.sh",
-    "test": "node_modules/.bin/mocha ./index.test.js --bail --slow 600"
+    "test": "node_modules/.bin/mocha ./index.test.js --bail --slow 600 --timeout 5s"
   },
   "repository": {
     "type": "git",

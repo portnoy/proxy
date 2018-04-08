@@ -1,30 +1,52 @@
 #!/bin/bash
 
+usage () 
+{
+	echo
+    echo "Usage: $0 [iterations] [target]"
+	echo
+	exit 1
+}
+
 # this is a very quick load test
-# use it for local testing on port 8081
-# or modify these line
-HOST='localhost'
-PORT=8081
-PROXY=${HOST}:${PORT}
+ITER=$1 
+[ -z "$ITER" ] && ITER=10
+shift
+
+TARGET=$1
+[ -z "$TARGET" ] && TARGET='local'
+shift
+
+if [ "$TARGET" == 'local' ] ; then
+    PROTO='http'
+    HOST='localhost'
+    PORT=':8081'
+elif [ "$TARGET" == 'google' ] ; then
+    PROTO='https'
+    HOST='proxy-3030.appspot.com'
+    PORT=''
+else
+    echo "Don't know how to test on $TARGET"
+    usage
+fi
+
+PROXY=${PROTO}://${HOST}${PORT}
 
 # sanity test
 rc=`curl -s -o /dev/null -w "%{http_code}" ${PROXY}/`
-[ $rc -ne 200 ] && echo "Trivial test failed" && exit 1
+[ $rc -ne 200 ] && echo "Trivial test failed" && exit 2
 
 rc=`curl -s -o /dev/null -w "%{http_code}" ${PROXY}/404`
-[ $rc -ne 404 ] && echo "Trivial negative test failed" && exit 2
+[ $rc -ne 404 ] && echo "Trivial negative test failed" && exit 3
 
 echo "Trivial tests passed"
 echo "Starting parallel downloads"
 echo
 
-ITER=$1 
-[ -z "$ITER" ] && ITER=10
-
 mkdir -p data
 
 # large file
-curl -o /dev/null ${PROXY}/image?url=http://www.effigis.com/wp-content/themes/effigis_2014/img/Airbus-Spot6-50cm-St-Benoit-du-Lac-Quebec-2014-09-04.tif &
+# curl -o /dev/null ${PROXY}/image?url=http://www.effigis.com/wp-content/themes/effigis_2014/img/Airbus-Spot6-50cm-St-Benoit-du-Lac-Quebec-2014-09-04.tif &
 
 # bunch of smaller files in parallel
 for cnt in `seq $ITER` ; do
