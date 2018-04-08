@@ -20,7 +20,7 @@ conf = {
 
 //  quick and dirty toggle between local/remote test targets below
 module.exports = {
-     // test: conf.local
-     test: conf.google
+     test: conf.local
+     // test: conf.google
 }
 

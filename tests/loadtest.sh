@@ -20,7 +20,7 @@ shift
 if [ "$TARGET" == 'local' ] ; then
     PROTO='http'
     HOST='localhost'
-    PORT=':8081'
+    PORT=':8080'
 elif [ "$TARGET" == 'google' ] ; then
     PROTO='https'
     HOST='proxy-3030.appspot.com'
@@ -31,6 +31,7 @@ else
 fi
 
 PROXY=${PROTO}://${HOST}${PORT}
+echo "Testing on $PROXY"
 
 # sanity test
 rc=`curl -s -o /dev/null -w "%{http_code}" ${PROXY}/`
@@ -40,13 +41,13 @@ rc=`curl -s -o /dev/null -w "%{http_code}" ${PROXY}/404`
 [ $rc -ne 404 ] && echo "Trivial negative test failed" && exit 3
 
 echo "Trivial tests passed"
-echo "Starting parallel downloads"
+echo "Starting $ITER parallel downloads"
 echo
 
 mkdir -p data
 
 # large file
-# curl -o /dev/null ${PROXY}/image?url=http://www.effigis.com/wp-content/themes/effigis_2014/img/Airbus-Spot6-50cm-St-Benoit-du-Lac-Quebec-2014-09-04.tif &
+curl -o /dev/null ${PROXY}/image?url=http://www.effigis.com/wp-content/themes/effigis_2014/img/Airbus-Spot6-50cm-St-Benoit-du-Lac-Quebec-2014-09-04.tif &
 
 # bunch of smaller files in parallel
 for cnt in `seq $ITER` ; do

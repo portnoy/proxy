@@ -100,7 +100,7 @@ describe('Download Images Test:', () => {
 });
 
 describe('Stats Page Test:', () => {
-  it('should display proxy stats above', () => {
+  it('should display proxy instance stats above', () => {
 	return getReq(proxy + '/admin')
 	  .then(response => {
 		  expect(typeof response).to.equal('object');

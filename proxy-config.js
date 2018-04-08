@@ -6,9 +6,9 @@
  */
 
 module.exports = {
-    port     : 8080,        // local meaning
-                            // can be re-read dynamically via SIGHUP
-    keepalive: true,        // set to true for performance optimization for limited distinct image servers
-    admin    : true,        // allow /admin REST call
-    verbose  : false
-}
+  port      : 8080,   // local meaning
+                      // can be re-read dynamically via SIGHUP
+  keepalive : true,   // set to true for performance optimization for limited distinct image servers
+  admin     : true,   // allow /admin REST call
+  verbose   : false,  // console log clt requests
+};
